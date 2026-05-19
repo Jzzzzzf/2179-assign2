@@ -1,0 +1,111 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Scatter plot of 2023 AFL teams: points scored vs points conceded, bubble size = wins",
+  "width": 280,
+  "height": 300,
+  "layer": [
+    {
+      "data": {
+        "sequence": {"start": 1250, "stop": 2550, "step": 50, "as": "pts"}
+      },
+      "mark": {
+        "type": "line",
+        "strokeDash": [5, 5],
+        "color": "#aaa",
+        "strokeWidth": 1,
+        "opacity": 0.7
+      },
+      "encoding": {
+        "x": {"field": "pts", "type": "quantitative"},
+        "y": {"field": "pts", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"x": 2400, "y": 2360, "label": "← balanced"}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "color": "#999",
+        "fontSize": 10,
+        "angle": -35
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"url": "data/afl_ladder.csv"},
+      "transform": [{"filter": "datum.season == 2023"}],
+      "mark": {"type": "circle", "opacity": 0.82, "stroke": "#fff", "strokeWidth": 0.5},
+      "encoding": {
+        "x": {
+          "field": "pts_for",
+          "type": "quantitative",
+          "title": "Points Scored (season total)",
+          "scale": {"domain": [1200, 2550]},
+          "axis": {"tickCount": 5}
+        },
+        "y": {
+          "field": "pts_against",
+          "type": "quantitative",
+          "title": "Points Conceded (lower = better defence)",
+          "scale": {"domain": [1600, 2600]},
+          "axis": {"tickCount": 5}
+        },
+        "size": {
+          "field": "wins",
+          "type": "quantitative",
+          "scale": {"range": [40, 550]},
+          "legend": {"title": "Wins", "orient": "bottom-right", "offset": -10}
+        },
+        "color": {
+          "field": "win_pct",
+          "type": "quantitative",
+          "scale": {"scheme": "redyellowgreen", "domain": [10, 90]},
+          "legend": {"title": "Win %", "orient": "right"}
+        },
+        "tooltip": [
+          {"field": "team", "title": "Team"},
+          {"field": "wins", "title": "Wins"},
+          {"field": "losses", "title": "Losses"},
+          {"field": "pts_for", "title": "Pts Scored", "format": ","},
+          {"field": "pts_against", "title": "Pts Conceded", "format": ","},
+          {"field": "win_pct", "title": "Win Rate (%)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "data": {"url": "data/afl_ladder.csv"},
+      "transform": [
+        {"filter": "datum.season == 2023"},
+        {
+          "filter": "datum.team == 'Collingwood' || datum.team == 'Geelong' || datum.team == 'Melbourne' || datum.team == 'North Melbourne' || datum.team == 'West Coast Eagles' || datum.team == 'Brisbane Lions'"
+        }
+      ],
+      "mark": {"type": "text", "dy": -12, "fontSize": 11, "fontWeight": "bold"},
+      "encoding": {
+        "x": {"field": "pts_for", "type": "quantitative"},
+        "y": {"field": "pts_against", "type": "quantitative"},
+        "text": {
+          "condition": {"test": "datum.team == 'North Melbourne'", "value": "N. Melb"},
+          "field": "team"
+        },
+        "color": {
+          "field": "win_pct",
+          "type": "quantitative",
+          "scale": {"scheme": "redyellowgreen", "domain": [10, 90]}
+        }
+      }
+    }
+  ],
+  "resolve": {"scale": {"color": "shared", "size": "shared"}},
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"grid": true, "gridOpacity": 0.3}
+  }
+}

@@ -1,0 +1,341 @@
+/* =============================================
+   AFL Data Visualisation — Global Styles
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green-darkest:  #1a2e1a;
+  --green-dark:     #2d6a4f;
+  --green-mid:      #40916c;
+  --green-light:    #74c69d;
+  --green-pale:     #d8f3dc;
+  --green-bg:       #f0f7f0;
+  --orange:         #e76f51;
+  --text-dark:      #1a1a1a;
+  --text-mid:       #444;
+  --text-light:     #777;
+  --border:         #dde8dd;
+  --card-bg:        #ffffff;
+  --radius:         10px;
+  --shadow:         0 2px 12px rgba(45, 106, 79, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-dark);
+  background: #fff;
+}
+
+/* =============================================
+   Hero Section
+   ============================================= */
+
+.hero {
+  background: var(--green-darkest);
+  background-image: linear-gradient(135deg, #0d1f0d 0%, #1a2e1a 50%, #2d6a4f 100%);
+  color: white;
+  padding: 56px 24px 48px;
+  text-align: center;
+}
+
+.hero-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.hero .subtitle {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.72);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  padding: 14px 24px;
+  min-width: 180px;
+  text-align: left;
+}
+
+.stat-box .stat-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 4px;
+}
+
+.stat-box .stat-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* =============================================
+   Section Layout
+   ============================================= */
+
+.section {
+  padding: 52px 24px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.section:nth-child(even) {
+  max-width: 100%;
+  background: var(--green-bg);
+  padding: 52px 24px;
+}
+
+.section:nth-child(even) .section-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.section-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--green-mid);
+  margin-bottom: 10px;
+}
+
+.section h2 {
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--green-darkest);
+  margin-bottom: 14px;
+  max-width: 800px;
+  letter-spacing: -0.02em;
+}
+
+.section .narrative {
+  font-size: 0.97rem;
+  color: var(--text-mid);
+  max-width: 760px;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+/* =============================================
+   Chart Grid
+   ============================================= */
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.chart-row.wide-left {
+  grid-template-columns: 3fr 2fr;
+}
+
+.chart-row.wide-right {
+  grid-template-columns: 2fr 3fr;
+}
+
+.chart-row.full-width {
+  grid-template-columns: 1fr;
+}
+
+.chart-row + .chart-row {
+  margin-top: 20px;
+}
+
+/* =============================================
+   Chart Cards
+   ============================================= */
+
+.chart-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.section:nth-child(even) .chart-card {
+  background: #fff;
+}
+
+.chart-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-light);
+  margin-bottom: 14px;
+}
+
+.chart-note {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+.chart-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Vega-Lite embed container — remove extra padding */
+.vega-embed {
+  width: 100% !important;
+}
+
+.vega-embed summary {
+  display: none !important;
+}
+
+/* Radar chart Vega binding labels */
+.vega-bind {
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  margin-top: 6px;
+}
+
+.vega-bind label {
+  font-weight: 600;
+}
+
+/* =============================================
+   Section-specific: Hero stats
+   ============================================= */
+
+/* Section separators */
+.section-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--green-light);
+  margin: 0 auto 32px;
+  display: none;
+}
+
+/* =============================================
+   Footer
+   ============================================= */
+
+footer {
+  background: var(--green-darkest);
+  color: rgba(255,255,255,0.65);
+  padding: 32px 24px;
+}
+
+footer .footer-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+footer p {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  margin-bottom: 4px;
+}
+
+footer a {
+  color: var(--green-light);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .idioms-note {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.38);
+  margin-top: 8px;
+}
+
+/* =============================================
+   Responsive — small laptops (≥900px required)
+   ============================================= */
+
+@media (max-width: 900px) {
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+  .hero-stats {
+    gap: 10px;
+  }
+  .stat-box {
+    min-width: 140px;
+    padding: 10px 16px;
+  }
+  .chart-row,
+  .chart-row.wide-left,
+  .chart-row.wide-right {
+    grid-template-columns: 1fr;
+  }
+  .section h2 {
+    font-size: 1.35rem;
+  }
+}
+
+/* =============================================
+   Utility
+   ============================================= */
+
+.text-center { text-align: center; }
+
+.highlight-orange { color: var(--orange); font-weight: 700; }
+.highlight-green  { color: var(--green-dark); font-weight: 700; }
+
+.chart-legend-note {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* Scroll-activated reveal (subtle) */
+.chart-card {
+  transition: box-shadow 0.2s ease;
+}
+.chart-card:hover {
+  box-shadow: 0 4px 20px rgba(45, 106, 79, 0.18);
+}

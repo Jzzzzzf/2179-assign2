@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Multi-line chart showing win rate per season for key AFL teams 2019–2023",
+  "width": 280,
+  "height": 300,
+  "data": {"url": "data/afl_ladder.csv"},
+  "transform": [
+    {
+      "filter": "datum.team == 'Geelong' || datum.team == 'Melbourne' || datum.team == 'Brisbane Lions' || datum.team == 'Richmond' || datum.team == 'Collingwood' || datum.team == 'North Melbourne'"
+    }
+  ],
+  "params": [
+    {
+      "name": "teamHighlight",
+      "select": {"type": "point", "fields": ["team"]},
+      "bind": "legend"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5,
+        "point": {"size": 50, "filled": true}
+      },
+      "encoding": {
+        "x": {
+          "field": "season",
+          "type": "ordinal",
+          "title": "Season",
+          "axis": {"labelAngle": 0}
+        },
+        "y": {
+          "field": "win_pct",
+          "type": "quantitative",
+          "title": "Win Rate (%)",
+          "scale": {"domain": [0, 100]},
+          "axis": {"tickCount": 5, "labelExpr": "datum.value + '%'"}
+        },
+        "color": {
+          "field": "team",
+          "type": "nominal",
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 3,
+            "labelFontSize": 11,
+            "symbolSize": 120
+          },
+          "scale": {
+            "domain": ["Geelong", "Melbourne", "Brisbane Lions", "Richmond", "Collingwood", "North Melbourne"],
+            "range": ["#1A3863", "#CC0000", "#7A2035", "#FFD700", "#111111", "#003399"]
+          }
+        },
+        "opacity": {
+          "condition": {"param": "teamHighlight", "value": 1},
+          "value": 0.12
+        },
+        "tooltip": [
+          {"field": "team", "title": "Team"},
+          {"field": "season", "title": "Season"},
+          {"field": "win_pct", "title": "Win Rate (%)", "format": ".1f"},
+          {"field": "wins", "title": "Wins"},
+          {"field": "losses", "title": "Losses"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [{"season": 2021, "win_pct": 88, "label": "2021 Premiers!"}]
+      },
+      "mark": {
+        "type": "text",
+        "fontWeight": "bold",
+        "fontSize": 10,
+        "color": "#CC0000",
+        "dx": 5,
+        "dy": -8
+      },
+      "encoding": {
+        "x": {"field": "season", "type": "ordinal"},
+        "y": {"field": "win_pct", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"values": [{"season": 2021}]},
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#CC0000",
+        "strokeWidth": 1,
+        "opacity": 0.6
+      },
+      "encoding": {
+        "x": {"field": "season", "type": "ordinal"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"grid": true, "gridOpacity": 0.3}
+  }
+}

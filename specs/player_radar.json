@@ -1,0 +1,328 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Custom-built radar chart comparing AFL player skill profiles across 6 statistics",
+  "width": 300,
+  "height": 300,
+  "padding": {"left": 70, "right": 70, "top": 55, "bottom": 55},
+  "autosize": "none",
+
+  "signals": [
+    {"name": "radius", "value": 115},
+    {"name": "cx", "update": "width / 2"},
+    {"name": "cy", "update": "height / 2"},
+    {
+      "name": "player1",
+      "value": "Lachie Neale",
+      "bind": {
+        "input": "select",
+        "name": "Player A: ",
+        "options": [
+          "Harris Andrews", "Jack Sinclair", "Luke Ryan",
+          "Charlie Curnow", "Jeremy Cameron",
+          "Caleb Serong", "Lachie Neale", "Nick Daicos"
+        ]
+      }
+    },
+    {
+      "name": "player2",
+      "value": "Jeremy Cameron",
+      "bind": {
+        "input": "select",
+        "name": "Player B: ",
+        "options": [
+          "Harris Andrews", "Jack Sinclair", "Luke Ryan",
+          "Charlie Curnow", "Jeremy Cameron",
+          "Caleb Serong", "Lachie Neale", "Nick Daicos"
+        ]
+      }
+    }
+  ],
+
+  "data": [
+    {
+      "name": "radar_data",
+      "values": [
+        {"player": "Harris Andrews",  "position": "Defender",   "statName": "Goals",     "value": 0.01, "axisIndex": 0},
+        {"player": "Harris Andrews",  "position": "Defender",   "statName": "Kicks",     "value": 0.55, "axisIndex": 1},
+        {"player": "Harris Andrews",  "position": "Defender",   "statName": "Handballs", "value": 0.22, "axisIndex": 2},
+        {"player": "Harris Andrews",  "position": "Defender",   "statName": "Marks",     "value": 0.95, "axisIndex": 3},
+        {"player": "Harris Andrews",  "position": "Defender",   "statName": "Tackles",   "value": 0.24, "axisIndex": 4},
+        {"player": "Harris Andrews",  "position": "Defender",   "statName": "Disposals", "value": 0.46, "axisIndex": 5},
+        {"player": "Jack Sinclair",   "position": "Defender",   "statName": "Goals",     "value": 0.08, "axisIndex": 0},
+        {"player": "Jack Sinclair",   "position": "Defender",   "statName": "Kicks",     "value": 1.00, "axisIndex": 1},
+        {"player": "Jack Sinclair",   "position": "Defender",   "statName": "Handballs", "value": 0.60, "axisIndex": 2},
+        {"player": "Jack Sinclair",   "position": "Defender",   "statName": "Marks",     "value": 0.60, "axisIndex": 3},
+        {"player": "Jack Sinclair",   "position": "Defender",   "statName": "Tackles",   "value": 0.41, "axisIndex": 4},
+        {"player": "Jack Sinclair",   "position": "Defender",   "statName": "Disposals", "value": 0.93, "axisIndex": 5},
+        {"player": "Luke Ryan",       "position": "Defender",   "statName": "Goals",     "value": 0.00, "axisIndex": 0},
+        {"player": "Luke Ryan",       "position": "Defender",   "statName": "Kicks",     "value": 1.00, "axisIndex": 1},
+        {"player": "Luke Ryan",       "position": "Defender",   "statName": "Handballs", "value": 0.28, "axisIndex": 2},
+        {"player": "Luke Ryan",       "position": "Defender",   "statName": "Marks",     "value": 1.00, "axisIndex": 3},
+        {"player": "Luke Ryan",       "position": "Defender",   "statName": "Tackles",   "value": 0.44, "axisIndex": 4},
+        {"player": "Luke Ryan",       "position": "Defender",   "statName": "Disposals", "value": 0.77, "axisIndex": 5},
+        {"player": "Charlie Curnow",  "position": "Forward",    "statName": "Goals",     "value": 1.00, "axisIndex": 0},
+        {"player": "Charlie Curnow",  "position": "Forward",    "statName": "Kicks",     "value": 0.55, "axisIndex": 1},
+        {"player": "Charlie Curnow",  "position": "Forward",    "statName": "Handballs", "value": 0.19, "axisIndex": 2},
+        {"player": "Charlie Curnow",  "position": "Forward",    "statName": "Marks",     "value": 0.84, "axisIndex": 3},
+        {"player": "Charlie Curnow",  "position": "Forward",    "statName": "Tackles",   "value": 0.21, "axisIndex": 4},
+        {"player": "Charlie Curnow",  "position": "Forward",    "statName": "Disposals", "value": 0.44, "axisIndex": 5},
+        {"player": "Jeremy Cameron",  "position": "Forward",    "statName": "Goals",     "value": 0.85, "axisIndex": 0},
+        {"player": "Jeremy Cameron",  "position": "Forward",    "statName": "Kicks",     "value": 0.65, "axisIndex": 1},
+        {"player": "Jeremy Cameron",  "position": "Forward",    "statName": "Handballs", "value": 0.21, "axisIndex": 2},
+        {"player": "Jeremy Cameron",  "position": "Forward",    "statName": "Marks",     "value": 0.69, "axisIndex": 3},
+        {"player": "Jeremy Cameron",  "position": "Forward",    "statName": "Tackles",   "value": 0.27, "axisIndex": 4},
+        {"player": "Jeremy Cameron",  "position": "Forward",    "statName": "Disposals", "value": 0.52, "axisIndex": 5},
+        {"player": "Caleb Serong",    "position": "Midfielder", "statName": "Goals",     "value": 0.06, "axisIndex": 0},
+        {"player": "Caleb Serong",    "position": "Midfielder", "statName": "Kicks",     "value": 0.78, "axisIndex": 1},
+        {"player": "Caleb Serong",    "position": "Midfielder", "statName": "Handballs", "value": 1.00, "axisIndex": 2},
+        {"player": "Caleb Serong",    "position": "Midfielder", "statName": "Marks",     "value": 0.40, "axisIndex": 3},
+        {"player": "Caleb Serong",    "position": "Midfielder", "statName": "Tackles",   "value": 1.00, "axisIndex": 4},
+        {"player": "Caleb Serong",    "position": "Midfielder", "statName": "Disposals", "value": 0.99, "axisIndex": 5},
+        {"player": "Lachie Neale",    "position": "Midfielder", "statName": "Goals",     "value": 0.04, "axisIndex": 0},
+        {"player": "Lachie Neale",    "position": "Midfielder", "statName": "Kicks",     "value": 0.61, "axisIndex": 1},
+        {"player": "Lachie Neale",    "position": "Midfielder", "statName": "Handballs", "value": 0.96, "axisIndex": 2},
+        {"player": "Lachie Neale",    "position": "Midfielder", "statName": "Marks",     "value": 0.51, "axisIndex": 3},
+        {"player": "Lachie Neale",    "position": "Midfielder", "statName": "Tackles",   "value": 0.82, "axisIndex": 4},
+        {"player": "Lachie Neale",    "position": "Midfielder", "statName": "Disposals", "value": 0.86, "axisIndex": 5},
+        {"player": "Nick Daicos",     "position": "Midfielder", "statName": "Goals",     "value": 0.28, "axisIndex": 0},
+        {"player": "Nick Daicos",     "position": "Midfielder", "statName": "Kicks",     "value": 0.83, "axisIndex": 1},
+        {"player": "Nick Daicos",     "position": "Midfielder", "statName": "Handballs", "value": 0.96, "axisIndex": 2},
+        {"player": "Nick Daicos",     "position": "Midfielder", "statName": "Marks",     "value": 0.39, "axisIndex": 3},
+        {"player": "Nick Daicos",     "position": "Midfielder", "statName": "Tackles",   "value": 0.77, "axisIndex": 4},
+        {"player": "Nick Daicos",     "position": "Midfielder", "statName": "Disposals", "value": 1.00, "axisIndex": 5}
+      ],
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.player === player1 || datum.player === player2"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.axisIndex * 2 * PI / 6 - PI / 2",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": "cx + scale('radial', datum.value) * cos(datum.angle)",
+          "as": "x"
+        },
+        {
+          "type": "formula",
+          "expr": "cy + scale('radial', datum.value) * sin(datum.angle)",
+          "as": "y"
+        }
+      ]
+    },
+    {
+      "name": "grid_data",
+      "values": [
+        {"level": 0.25, "axisIndex": 0}, {"level": 0.25, "axisIndex": 1},
+        {"level": 0.25, "axisIndex": 2}, {"level": 0.25, "axisIndex": 3},
+        {"level": 0.25, "axisIndex": 4}, {"level": 0.25, "axisIndex": 5},
+        {"level": 0.5,  "axisIndex": 0}, {"level": 0.5,  "axisIndex": 1},
+        {"level": 0.5,  "axisIndex": 2}, {"level": 0.5,  "axisIndex": 3},
+        {"level": 0.5,  "axisIndex": 4}, {"level": 0.5,  "axisIndex": 5},
+        {"level": 0.75, "axisIndex": 0}, {"level": 0.75, "axisIndex": 1},
+        {"level": 0.75, "axisIndex": 2}, {"level": 0.75, "axisIndex": 3},
+        {"level": 0.75, "axisIndex": 4}, {"level": 0.75, "axisIndex": 5},
+        {"level": 1.0,  "axisIndex": 0}, {"level": 1.0,  "axisIndex": 1},
+        {"level": 1.0,  "axisIndex": 2}, {"level": 1.0,  "axisIndex": 3},
+        {"level": 1.0,  "axisIndex": 4}, {"level": 1.0,  "axisIndex": 5}
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.axisIndex * 2 * PI / 6 - PI / 2",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": "cx + datum.level * radius * cos(datum.angle)",
+          "as": "x"
+        },
+        {
+          "type": "formula",
+          "expr": "cy + datum.level * radius * sin(datum.angle)",
+          "as": "y"
+        }
+      ]
+    },
+    {
+      "name": "axes_data",
+      "values": [
+        {"statName": "Goals",     "axisIndex": 0},
+        {"statName": "Kicks",     "axisIndex": 1},
+        {"statName": "Handballs", "axisIndex": 2},
+        {"statName": "Marks",     "axisIndex": 3},
+        {"statName": "Tackles",   "axisIndex": 4},
+        {"statName": "Disposals", "axisIndex": 5}
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.axisIndex * 2 * PI / 6 - PI / 2",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": "cx + (radius + 22) * cos(datum.angle)",
+          "as": "labelX"
+        },
+        {
+          "type": "formula",
+          "expr": "cy + (radius + 22) * sin(datum.angle)",
+          "as": "labelY"
+        },
+        {
+          "type": "formula",
+          "expr": "cx + radius * cos(datum.angle)",
+          "as": "endX"
+        },
+        {
+          "type": "formula",
+          "expr": "cy + radius * sin(datum.angle)",
+          "as": "endY"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "radial",
+      "type": "linear",
+      "domain": [0, 1],
+      "range": [0, {"signal": "radius"}]
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "radar_data", "field": "player", "sort": {"field": "player"}},
+      "range": ["#4477AA", "#EE6677"]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "facet": {"data": "grid_data", "name": "grid_level", "groupby": "level"}
+      },
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "grid_level"},
+          "sort": {"field": "axisIndex", "order": "ascending"},
+          "encode": {
+            "enter": {
+              "x": {"field": "x"},
+              "y": {"field": "y"},
+              "stroke": {"value": "#d0d0d0"},
+              "strokeWidth": {"value": 1},
+              "interpolate": {"value": "linear-closed"},
+              "fillOpacity": {"value": 0}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "rule",
+      "from": {"data": "axes_data"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "cx"},
+          "y": {"signal": "cy"},
+          "x2": {"field": "endX"},
+          "y2": {"field": "endY"},
+          "stroke": {"value": "#d0d0d0"},
+          "strokeWidth": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "group",
+      "from": {
+        "facet": {
+          "data": "radar_data",
+          "name": "player_path",
+          "groupby": "player"
+        }
+      },
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "player_path"},
+          "sort": {"field": "axisIndex", "order": "ascending"},
+          "encode": {
+            "enter": {
+              "interpolate": {"value": "linear-closed"},
+              "strokeWidth": {"value": 2.5}
+            },
+            "update": {
+              "x": {"field": "x"},
+              "y": {"field": "y"},
+              "stroke": {"scale": "color", "field": "player"},
+              "fill": {"scale": "color", "field": "player"},
+              "fillOpacity": {"value": 0.12}
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "from": {"data": "player_path"},
+          "encode": {
+            "enter": {"size": {"value": 35}},
+            "update": {
+              "x": {"field": "x"},
+              "y": {"field": "y"},
+              "fill": {"scale": "color", "field": "player"},
+              "opacity": {"value": 0.9}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "from": {"data": "axes_data"},
+      "encode": {
+        "enter": {
+          "x": {"field": "labelX"},
+          "y": {"field": "labelY"},
+          "text": {"field": "statName"},
+          "fill": {"value": "#333"},
+          "fontSize": {"value": 13},
+          "fontWeight": {"value": "bold"},
+          "align": {
+            "rule": [
+              {"test": "abs(datum.labelX - cx) < 8", "value": "center"},
+              {"test": "datum.labelX < cx", "value": "right"},
+              {"value": "left"}
+            ]
+          },
+          "baseline": {
+            "rule": [
+              {"test": "datum.labelY < cy - 8", "value": "bottom"},
+              {"test": "datum.labelY > cy + 8", "value": "top"},
+              {"value": "middle"}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 10},
+          "y": {"value": -15},
+          "text": {"value": "Values normalised to league max (2023)"},
+          "fill": {"value": "#999"},
+          "fontSize": {"value": 10},
+          "fontStyle": {"value": "italic"}
+        }
+      }
+    }
+  ]
+}

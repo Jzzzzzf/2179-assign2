@@ -1,0 +1,25 @@
+year,team,opponent,margin,team_color,team_abbr
+2000,Essendon,Melbourne,57,#CC2529,ESS
+2001,Brisbane Lions,Essendon,15,#7A2035,BRI
+2002,Brisbane Lions,Collingwood,3,#7A2035,BRI
+2003,Brisbane Lions,Collingwood,68,#7A2035,BRI
+2004,Port Adelaide,Brisbane Lions,49,#008080,PA
+2005,Sydney Swans,West Coast Eagles,1,#E8112D,SYD
+2006,West Coast Eagles,Sydney Swans,16,#0B2D6B,WCE
+2007,Geelong,Port Adelaide,119,#1A3863,GEE
+2008,Hawthorn,Geelong,26,#5E2600,HW
+2009,Geelong,St Kilda,66,#1A3863,GEE
+2010,Collingwood,St Kilda,35,#444444,COL
+2011,Geelong,Collingwood,38,#1A3863,GEE
+2012,Sydney Swans,Hawthorn,10,#E8112D,SYD
+2013,Hawthorn,Fremantle,15,#5E2600,HW
+2014,Hawthorn,Sydney Swans,63,#5E2600,HW
+2015,Hawthorn,West Coast Eagles,46,#5E2600,HW
+2016,Western Bulldogs,Sydney Swans,22,#0038A8,WB
+2017,Richmond,Adelaide Crows,16,#FFD700,RIC
+2018,West Coast Eagles,Collingwood,47,#0B2D6B,WCE
+2019,Richmond,GWS Giants,67,#FFD700,RIC
+2020,Richmond,Geelong,31,#FFD700,RIC
+2021,Melbourne,Western Bulldogs,74,#CC0000,MEL
+2022,Geelong,Sydney Swans,81,#1A3863,GEE
+2023,Collingwood,Brisbane Lions,4,#444444,COL

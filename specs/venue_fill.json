@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Horizontal bar chart showing 2023 AFL venue fill rates, sorted by fill rate",
+  "width": 340,
+  "height": 270,
+  "data": {"url": "data/afl_venue_attendance_2023.csv"},
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 5},
+      "encoding": {
+        "y": {
+          "field": "venue",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null,
+          "axis": {"labelFontSize": 12}
+        },
+        "x": {
+          "field": "fill_rate_pct",
+          "type": "quantitative",
+          "title": "Fill Rate (%)",
+          "scale": {"domain": [0, 100]},
+          "axis": {"tickCount": 5, "grid": false}
+        },
+        "color": {
+          "field": "fill_rate_pct",
+          "type": "quantitative",
+          "scale": {"domain": [30, 80], "range": ["#c8e6c9", "#1b5e20"]},
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "venue", "title": "Venue"},
+          {"field": "fill_rate_pct", "title": "Fill Rate (%)", "format": ".1f"},
+          {"field": "ha_average", "title": "Avg Attendance", "format": ","},
+          {"field": "capacity", "title": "Capacity", "format": ","},
+          {"field": "ha_games", "title": "Games Hosted"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "fontWeight": "bold",
+        "fontSize": 12
+      },
+      "encoding": {
+        "y": {"field": "venue", "type": "nominal", "sort": "-x"},
+        "x": {"field": "fill_rate_pct", "type": "quantitative"},
+        "text": {
+          "field": "fill_rate_pct",
+          "format": ".0f"
+        },
+        "color": {"value": "#1b5e20"}
+      }
+    },
+    {
+      "data": {"values": [{"x": 50, "label": "50%"}]},
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#bbb",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"domain": false}
+  }
+}

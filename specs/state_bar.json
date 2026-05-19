@@ -1,0 +1,158 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "description": "Horizontal bar chart showing number of AFL clubs per state",
+
+  "width": 280,
+  "height": 280,
+
+  "data": {
+    "url": "data/afl_clubs_by_state.csv"
+  },
+
+  "transform": [
+
+    {
+      "filter": "datum.clubs > 0"
+    },
+
+    {
+      "calculate": "datum.state === 'Victoria' ? 'VIC' : datum.state === 'New South Wales' ? 'NSW' : datum.state === 'Queensland' ? 'QLD' : datum.state === 'Western Australia' ? 'WA' : 'SA'",
+      "as": "abbr"
+    }
+  ],
+
+  "layer": [
+
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 5
+      },
+
+      "encoding": {
+
+        "y": {
+          "field": "abbr",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null,
+
+          "axis": {
+            "labelFontSize": 13,
+            "labelFontWeight": "bold",
+            "ticks": false
+          }
+        },
+
+        "x": {
+          "field": "clubs",
+          "type": "quantitative",
+          "title": "Number of AFL Clubs",
+
+          "axis": {
+            "tickMinStep": 1,
+            "grid": false,
+            "domain": false,
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+
+        "color": {
+          "field": "clubs",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [0, 9],
+            "range": [
+              "#a5d6a7",
+              "#1b5e20"
+            ]
+          },
+
+          "legend": null
+        },
+
+        "tooltip": [
+
+          {
+            "field": "state",
+            "title": "State"
+          },
+
+          {
+            "field": "clubs",
+            "title": "AFL Clubs"
+          },
+
+          {
+            "field": "club_list",
+            "title": "Teams"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 6,
+        "fontWeight": "bold",
+        "fontSize": 13
+      },
+
+      "encoding": {
+
+        "y": {
+          "field": "abbr",
+          "type": "nominal",
+          "sort": "-x"
+        },
+
+        "x": {
+          "field": "clubs",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "clubs"
+        },
+
+        "color": {
+
+          "condition": {
+            "test": "datum.clubs >= 6",
+            "value": "white"
+          },
+
+          "value": "#555555"
+        }
+      }
+    }
+  ],
+
+  "title": {
+    "text": "CLUBS PER STATE",
+    "anchor": "start",
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "color": "#6d6d6d",
+    "offset": 12
+  },
+
+  "config": {
+
+    "background": "#f5f5f5",
+
+    "view": {
+      "stroke": null
+    },
+
+    "axis": {
+      "domain": false
+    }
+  }
+}

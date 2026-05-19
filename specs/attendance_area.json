@@ -1,0 +1,119 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Area chart of total AFL season attendance 2015–2023, annotated with COVID-19 impact",
+  "width": 380,
+  "height": 270,
+  "layer": [
+
+    {
+      "data": { "url": "data/afl_season_attendance.csv" },
+      "mark": {
+        "type": "area",
+        "line": { "color": "#2d6a4f", "strokeWidth": 2 },
+        "color": "#74c69d",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Season",
+          "axis": { "labelAngle": 0 }
+        },
+        "y": {
+          "field": "ha_attendance",
+          "type": "quantitative",
+          "title": "Total Attendance",
+          "axis": {
+            "tickCount": 5,
+            "labelExpr": "datum.value >= 1000000 ? format(datum.value / 1000000, '.1f') + 'M' : datum.value"
+          }
+        },
+        "tooltip": [
+          { "field": "year",           "title": "Season" },
+          { "field": "ha_attendance",  "title": "Total Attendance", "format": "," },
+          { "field": "ha_games",       "title": "Games Played" },
+          { "field": "ha_average",     "title": "Avg per Game", "format": "," }
+        ]
+      }
+    },
+
+    {
+      "data": { "values": [{ "year": "2020" }] },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [5, 5],
+        "color": "#e76f51",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" }
+      }
+    },
+
+    {
+      "data": {
+        "values": [{ "year": "2020", "ha_attendance": 826458, "label": "COVID-19" }]
+      },
+      "mark": {
+        "type": "text",
+        "color": "#e76f51",
+        "fontWeight": "bold",
+        "fontSize": 12,
+        "dx": 8,
+        "dy": -38,
+        "align": "left"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal", "band": 0.5 },
+        "y": { "field": "ha_attendance", "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    },
+
+    {
+      "data": {
+        "values": [{ "year": "2020", "ha_attendance": 826458, "label": "826K only (−88%)" }]
+      },
+      "mark": {
+        "type": "text",
+        "color": "#e76f51",
+        "fontSize": 10,
+        "dx": 8,
+        "dy": -20,
+        "align": "left"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal", "band": 0.5 },
+        "y": { "field": "ha_attendance", "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    },
+
+    {
+      "data": {
+        "values": [{ "year": "2023", "ha_attendance": 7474684, "label": "7.47M — record high" }]
+      },
+      "mark": {
+        "type": "text",
+        "color": "#1b5e20",
+        "fontWeight": "bold",
+        "fontSize": 11,
+        "dx": 0,
+        "dy": -14,
+        "align": "center"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal", "band": 0.5 },
+        "y": { "field": "ha_attendance", "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    }
+
+  ],
+
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "grid": true, "gridOpacity": 0.3 }
+  }
+}

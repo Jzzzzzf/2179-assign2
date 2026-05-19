@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Box plot and individual player points showing disposals per game by position in 2023",
+  "width": 320,
+  "height": 300,
+  "data": {"url": "data/afl_player_stats_2023.csv"},
+  "layer": [
+    {
+      "mark": {
+        "type": "boxplot",
+        "extent": "min-max",
+        "size": 40,
+        "median": {"color": "white", "strokeWidth": 2.5},
+        "box": {"opacity": 0.7}
+      },
+      "encoding": {
+        "x": {
+          "field": "position",
+          "type": "nominal",
+          "title": "Position",
+          "sort": ["Midfielder", "Defender", "Forward"],
+          "axis": {"labelFontSize": 13, "labelFontWeight": "bold"}
+        },
+        "y": {
+          "field": "avg_disposals",
+          "type": "quantitative",
+          "title": "Avg Disposals per Game",
+          "scale": {"domain": [0, 40]},
+          "axis": {"grid": true, "gridOpacity": 0.3}
+        },
+        "color": {
+          "field": "position",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Midfielder", "Defender", "Forward"],
+            "range": ["#4c72b0", "#dd8452", "#55a868"]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 80,
+        "opacity": 0.9,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "position",
+          "type": "nominal",
+          "sort": ["Midfielder", "Defender", "Forward"]
+        },
+        "y": {
+          "field": "avg_disposals",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "position",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Midfielder", "Defender", "Forward"],
+            "range": ["#4c72b0", "#dd8452", "#55a868"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "player", "title": "Player"},
+          {"field": "team", "title": "Team"},
+          {"field": "position", "title": "Position"},
+          {"field": "avg_disposals", "title": "Avg Disposals", "format": ".2f"},
+          {"field": "games", "title": "Games"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"y": 28, "label": "28 = high disposal rate"}]},
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#999",
+        "strokeWidth": 1
+      },
+      "encoding": {"y": {"field": "y", "type": "quantitative"}}
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap showing win percentage for all 18 AFL teams across seasons 2019–2023",
+  "width": 185,
+  "height": 300,
+  "data": {"url": "data/afl_ladder.csv"},
+  "mark": {"type": "rect", "stroke": "white", "strokeWidth": 0.5},
+  "encoding": {
+    "x": {
+      "field": "season",
+      "type": "ordinal",
+      "title": "Season",
+      "axis": {"labelAngle": 0, "labelFontSize": 12}
+    },
+    "y": {
+      "field": "team",
+      "type": "nominal",
+      "sort": {
+        "field": "win_pct",
+        "op": "mean",
+        "order": "descending"
+      },
+      "title": null,
+      "axis": {"labelFontSize": 11}
+    },
+    "color": {
+      "field": "win_pct",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 100],
+        "scheme": "redyellowgreen"
+      },
+      "legend": {
+        "title": "Win %",
+        "orient": "right",
+        "gradientLength": 100,
+        "labelExpr": "datum.value + '%'"
+      }
+    },
+    "tooltip": [
+      {"field": "team", "title": "Team"},
+      {"field": "season", "title": "Season"},
+      {"field": "win_pct", "title": "Win Rate (%)", "format": ".1f"},
+      {"field": "wins", "title": "Wins"},
+      {"field": "losses", "title": "Losses"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"domain": false, "ticks": false}
+  }
+}

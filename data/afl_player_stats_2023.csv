@@ -1,0 +1,9 @@
+player,team,position,games,avg_disposals,avg_kicks,avg_handballs,avg_marks,avg_goals,avg_tackles
+Harris Andrews,Brisbane Lions,Defender,26,14.19,10.81,3.38,7.81,0.04,1.19
+Jack Sinclair,St Kilda,Defender,24,28.88,19.58,9.29,4.96,0.25,2.04
+Luke Ryan,Fremantle,Defender,23,23.96,19.61,4.35,8.22,0.0,2.17
+Charlie Curnow,Carlton,Forward,26,13.69,10.77,2.92,6.92,3.12,1.04
+Jeremy Cameron,Geelong,Forward,20,16.05,12.75,3.3,5.7,2.65,1.35
+Caleb Serong,Fremantle,Midfielder,22,30.68,15.32,15.36,3.27,0.18,4.95
+Lachie Neale,Brisbane Lions,Midfielder,26,26.69,11.96,14.73,4.19,0.12,4.08
+Nick Daicos,Collingwood,Midfielder,22,31.0,16.23,14.77,3.23,0.86,3.82

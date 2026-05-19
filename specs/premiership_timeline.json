@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dot strip timeline of AFL premiership winners 2000–2023 with dynasty annotations",
+  "width": 820,
+  "height": 140,
+  "layer": [
+    {
+      "data": {"values": [{"x1": 1998, "x2": 2025}]},
+      "mark": {"type": "rule", "color": "#d0d0d0", "strokeWidth": 1},
+      "encoding": {
+        "x": {"field": "x1", "type": "quantitative", "scale": {"domain": [1998, 2025]}},
+        "x2": {"field": "x2"},
+        "y": {"value": 85}
+      }
+    },
+    {
+      "data": {"url": "data/afl_premierships.csv"},
+      "mark": {
+        "type": "circle",
+        "size": 340,
+        "opacity": 0.95,
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {"domain": [1998, 2025]},
+          "axis": {
+            "tickCount": 12,
+            "format": "d",
+            "grid": false,
+            "domain": false,
+            "ticks": true,
+            "labelFontSize": 11,
+            "title": null
+          }
+        },
+        "y": {"value": 85},
+        "color": {
+          "field": "team_color",
+          "type": "nominal",
+          "scale": null,
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "year", "title": "Year"},
+          {"field": "team", "title": "Premiers"},
+          {"field": "opponent", "title": "Runner-up"},
+          {"field": "margin", "title": "Winning Margin (pts)"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"x1": 2013, "x2": 2015}]},
+      "mark": {"type": "rule", "color": "#5E2600", "strokeWidth": 2},
+      "encoding": {
+        "x": {"field": "x1", "type": "quantitative"},
+        "x2": {"field": "x2"},
+        "y": {"value": 57}
+      }
+    },
+    {
+      "data": {"values": [{"x1": 2001, "x2": 2003}]},
+      "mark": {"type": "rule", "color": "#7A2035", "strokeWidth": 2},
+      "encoding": {
+        "x": {"field": "x1", "type": "quantitative"},
+        "x2": {"field": "x2"},
+        "y": {"value": 57}
+      }
+    },
+    {
+      "data": {"values": [{"x1": 2017, "x2": 2020}]},
+      "mark": {"type": "rule", "color": "#B8A000", "strokeWidth": 2},
+      "encoding": {
+        "x": {"field": "x1", "type": "quantitative"},
+        "x2": {"field": "x2"},
+        "y": {"value": 57}
+      }
+    },
+    {
+      "data": {"values": [
+        {"year": 2002,   "label": "Brisbane 3-peat",  "color": "#7A2035", "yval": 28},
+        {"year": 2014,   "label": "Hawthorn 3-peat",  "color": "#5E2600", "yval": 44},
+        {"year": 2018.5, "label": "Richmond 3 in 4",  "color": "#B8A000", "yval": 28},
+        {"year": 2021,   "label": "↑ Melbourne ends 57-yr drought", "color": "#CC0000", "yval": 115}
+      ]},
+      "mark": {"type": "text", "fontWeight": "bold", "fontSize": 10},
+      "encoding": {
+        "x": {"field": "year", "type": "quantitative"},
+        "y": {"field": "yval", "type": "quantitative", "scale": null},
+        "text": {"field": "label"},
+        "color": {"field": "color", "type": "nominal", "scale": null}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}

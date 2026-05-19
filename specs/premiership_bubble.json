@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bubble chart showing total AFL premierships since 2000 per team, sized by count",
+  "width": 820,
+  "height": 160,
+  "data": {"url": "data/afl_premiership_totals.csv"},
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.92,
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {"domain": [0, 12]},
+          "axis": null
+        },
+        "y": {"value": 80},
+        "size": {
+          "field": "premierships",
+          "type": "quantitative",
+          "scale": {"range": [600, 2400]},
+          "legend": null
+        },
+        "color": {
+          "field": "team_color",
+          "type": "nominal",
+          "scale": null,
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "full_name", "title": "Team"},
+          {"field": "premierships", "title": "Premierships since 2000"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "white",
+        "fontWeight": "bold",
+        "fontSize": 10,
+        "dy": -6
+      },
+      "encoding": {
+        "x": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {"domain": [0, 12]}
+        },
+        "y": {"value": 80},
+        "text": {"field": "team_abbr"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "white",
+        "fontWeight": "bold",
+        "fontSize": 13,
+        "dy": 8
+      },
+      "encoding": {
+        "x": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {"domain": [0, 12]}
+        },
+        "y": {"value": 80},
+        "text": {"field": "premierships"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}
