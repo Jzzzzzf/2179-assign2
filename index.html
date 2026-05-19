@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inside the Game: What AFL Data Reveals</title>
+
+  <!-- Vega / Vega-Lite / vegaEmbed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.27.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.18.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.24.0"></script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ================================================
+     HERO
+     ================================================ -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>Inside the Game: What AFL Data Reveals</h1>
+    <p class="subtitle">About Australian Rules Football — the clubs, players, crowds, and champions that define the nation's game</p>
+
+    <div class="hero-stats">
+      <div class="stat-box">
+        <div class="stat-label">Clubs · States covered</div>
+        <div class="stat-value">18 clubs · 5 states</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avg attendance per game</div>
+        <div class="stat-value">36,110 fans (2023)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Seasons covered</div>
+        <div class="stat-value">2015 – 2023</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Data sources</div>
+        <div class="stat-value">AFL Tables · GitHub</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- ================================================
+     SECTION 1 — WHERE IS AFL PLAYED?
+     ================================================ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Section 1 of 5 — Where is AFL played?</div>
+    <h2>Victoria is the heartland — but the game now spans the nation</h2>
+    <p class="narrative">
+      Nine of eighteen AFL clubs are based in Victoria, the birthplace of the game. Over the past four decades the league deliberately 
+      expanded north and west — to Brisbane, Perth, Adelaide, Sydney, and the Gold Coast — to build a truly national competition. The map 
+      below shows how unevenly the clubs are distributed, and where the biggest stadiums sit. Victoria's dominance is unmistakable: it holds
+      nearly half the clubs and the two largest venues on earth designed for Australian rules football.
+    </p>
+
+    <div class="chart-row wide-left">
+      <div class="chart-card">
+        <div class="chart-title">AFL Club Distribution by State</div>
+        <div class="chart-container" id="map"></div>
+        <p class="chart-note">Shade intensity = number of clubs. Orange circles = stadium locations, sized by capacity. Hover for details.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Clubs per State</div>
+        <div class="chart-container" id="state-bar"></div>
+        <p class="chart-note">Victoria (VIC) accounts for half of all AFL clubs. Every other represented state has exactly two clubs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================
+     SECTION 2 — WHO HAS BEEN WINNING?
+     ================================================ -->
+<div style="background: var(--green-bg); padding: 52px 24px;">
+<div class="section-inner" style="max-width:1060px; margin:0 auto;">
+  <div class="section-label">Section 2 of 5 — Who has been winning?</div>
+  <h2>Melbourne surged to the top — while some clubs are stuck in a cycle of losing</h2>
+  <p class="narrative">
+    In 2019, Melbourne was a mid-table club sitting eleventh. By 2021 they were premiers — ending a
+    57-year drought — with an extraordinary 86% win rate. Geelong has been consistently elite for a
+    decade, winning the 2022 flag. At the other end, North Melbourne have failed to win even a third
+    of their games in any of the past five seasons. The left chart tracks win rates season by season;
+    the middle heatmap shows every team at a glance; the right chart reveals which clubs are strong
+    in attack and which leak points.
+  </p>
+
+  <div class="chart-row" style="grid-template-columns: 1fr 1fr 1fr;">
+    <div class="chart-card">
+      <div class="chart-title">Win Rate per Season 2019–2023</div>
+      <div class="chart-container" id="win-rate"></div>
+      <p class="chart-note">Click a team name in the legend to isolate its line. Melbourne's 2021 flag marked in red.</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">All Teams · All Seasons — Win Rate</div>
+      <div class="chart-container" id="team-heatmap"></div>
+      <p class="chart-note">Teams sorted by average win rate (top to bottom). Red = poor season, green = strong season.</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Attack vs Defence 2023</div>
+      <div class="chart-container" id="attack-defence"></div>
+      <p class="chart-note">Bubble size = wins. Teams to the right of the dashed diagonal score more than they concede. Colour = win rate.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ================================================
+     SECTION 3 — THE CROWD STORY
+     ================================================ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Section 3 of 5 — The crowd story</div>
+    <h2>COVID emptied every stadium in 2020 — fans came roaring back by 2023</h2>
+    <p class="narrative">
+      Over 6.9 million fans attended AFL matches in 2019. Then the pandemic hit. In 2020, that figure
+      collapsed to just 826,000 — a drop of 88% — as state governments imposed crowd restrictions or
+      moved games interstate into biosecure hubs. Restrictions eased slowly in 2021, and by 2023 the
+      crowds had not just recovered but smashed the all-time record, reaching 7.47 million. The right
+      chart shows how individual venues performed in 2023: the MCG and Perth Stadium led the country
+      in fill rate, while the smaller Gold Coast and Sydney venues still struggled to attract full houses.
+    </p>
+
+    <div class="chart-row wide-left">
+      <div class="chart-card">
+        <div class="chart-title">Total Season Attendance 2015–2023</div>
+        <div class="chart-container" id="attendance-area"></div>
+        <p class="chart-note">COVID-19 caused the sharpest single-season attendance drop in AFL history. Hover for exact figures.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Stadium Fill Rate 2023</div>
+        <div class="chart-container" id="venue-fill"></div>
+        <p class="chart-note">Fill rate = actual average attendance ÷ capacity. Perth and Adelaide Oval outperform larger Victorian grounds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================
+     SECTION 4 — WHO ARE THE PLAYERS?
+     ================================================ -->
+<div style="background: var(--green-bg); padding: 52px 24px;">
+<div class="section-inner" style="max-width:1060px; margin:0 auto;">
+  <div class="section-label">Section 4 of 5 — Who are the players?</div>
+  <h2>Midfielders touch the ball most — but the best players are dominant in every facet</h2>
+  <p class="narrative">
+    AFL positions shape what a player does on the field. Midfielders average 28+ disposals per game —
+    significantly more than forwards or defenders — but elite forwards are the goal-kickers who win
+    matches. Some defenders, such as Jack Sinclair and Luke Ryan, accumulate disposals at a rate rivalling
+    midfielders thanks to their rebounding role. The box plot on the left shows disposal distributions by
+    position. The radar chart on the right lets you compare any two players across six key statistics
+    simultaneously — use the dropdowns to explore.
+  </p>
+
+  <div class="chart-row">
+    <div class="chart-card">
+      <div class="chart-title">Disposals per Game by Position</div>
+      <div class="chart-container" id="boxplot"></div>
+      <p class="chart-note">Box = interquartile range; line = median; whiskers = min/max. Dots = individual player values. Hover for player names.</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Player Skill Profile</div>
+      <div class="chart-container" id="player-radar"></div>
+      <p class="chart-note">Values normalised to the league maximum for each statistic (2023 season). Use dropdowns to compare any two players.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ================================================
+     SECTION 5 — WHO ARE THE CHAMPIONS?
+     ================================================ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Section 5 of 5 — Who are the champions?</div>
+    <h2>Hawthorn's dynasty is over — Geelong and Melbourne signal a new era of AFL power</h2>
+    <p class="narrative">
+      Between 2013 and 2015, Hawthorn won three consecutive premierships — one of the great dynasties in
+      Australian sport. Richmond then dominated 2017–2020 with three flags in four years. In 2021,
+      Melbourne finally ended a 57-year drought to lift the cup. Geelong backed up with the flag in 2022
+      with an 81-point demolition of Sydney, before Collingwood claimed a tight four-point win over
+      Brisbane in 2023. The dot strip below shows every premiership winner since 2000; the bubble chart
+      summarises who has accumulated the most flags in the modern era.
+    </p>
+
+    <div class="chart-card" style="margin-bottom: 20px;">
+      <div class="chart-title">Premiership Winners 2000–2023 — Dot Strip Timeline (Custom-Built)</div>
+      <div class="chart-container" id="premiership-timeline"></div>
+      <p class="chart-note">Each dot represents one premiership. Colour matches team colours. Hover for year, opponent, and winning margin. Annotations highlight key dynasties.</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Total Premierships since 2000 — Bubble Chart</div>
+      <div class="chart-container" id="premiership-bubble"></div>
+      <p class="chart-note">Bubble area encodes total premierships. Hawthorn and Geelong lead with four each. Hover for full team name.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer>
+  <div class="footer-inner">
+    <p>
+      <strong style="color:rgba(255,255,255,0.85)">Data:</strong>
+      AFL Tables (<a href="https://www.afltables.com" target="_blank">afltables.com</a>) ·
+      AFL Data Analysis GitHub (<a href="https://github.com/akareen/AFL-Data-Analysis" target="_blank">github.com/akareen/AFL-Data-Analysis</a>)
+    </p>
+    <p>
+      <strong style="color:rgba(255,255,255,0.85)">Author:</strong>
+      Zhuofei Jia · FIT2179 Data Visualisation Assignment 2 · Monash University · 2026
+    </p>
+  </div>
+</footer>
+
+
+<!-- ================================================
+     VEGA-LITE EMBED SCRIPTS
+     ================================================ -->
+<script>
+  /* Shared embed options */
+  const embedOpts = {
+    renderer: "svg",
+    actions: false,
+    theme: "default"
+  };
+
+  /* Section 1 */
+  vegaEmbed("#map",         "specs/map.json",                embedOpts);
+  vegaEmbed("#state-bar",   "specs/state_bar.json",          embedOpts);
+
+  /* Section 2 */
+  vegaEmbed("#win-rate",    "specs/win_rate.json",           embedOpts);
+  vegaEmbed("#team-heatmap","specs/team_heatmap.json",       embedOpts);
+  vegaEmbed("#attack-defence","specs/attack_defence.json",   embedOpts);
+
+  /* Section 3 */
+  vegaEmbed("#attendance-area","specs/attendance_area.json", embedOpts);
+  vegaEmbed("#venue-fill",  "specs/venue_fill.json",         embedOpts);
+
+  /* Section 4 */
+  vegaEmbed("#boxplot",        "specs/boxplot.json",         embedOpts);
+
+  /* Radar chart is a Vega (not Vega-Lite) spec — vegaEmbed handles both */
+  vegaEmbed("#player-radar",   "specs/player_radar.json",    {
+    ...embedOpts,
+    actions: false
+  });
+
+  /* Section 5 */
+  vegaEmbed("#premiership-timeline","specs/premiership_timeline.json", embedOpts);
+  vegaEmbed("#premiership-bubble",  "specs/premiership_bubble.json",   embedOpts);
+</script>
+
+</body>
+</html>
